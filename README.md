@@ -1,0 +1,2 @@
+# CodewarsLinkedList
+ my codewars resulta
