@@ -1,35 +1,54 @@
-""" For your information:
 class Node(object):
-    def __init__(self, data):
+    def __init__(self, data=None, next=None):
         self.data = data
-        self.next = None
-"""
-class Node(object):
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-def sorted_insert(head, data):
-    # Your code goes here.
-    # Make sure to return the head of the list.
+        self.next = next
+
+def reverse(head):
+    if head is None or head.next is None:
+        return head
+    new_head = reverse(head.next)
+    head.next.next = head
+    head.next = None
+    return new_head
+
+def remove_duplicates(head):
     if head is None:
-        data = Node(data)
-        return data
-    saved_head = head
-    iteration = 1
-    while head:
-        if head.next is None:
-            head.next = Node(data)
-            break
-        if head.data > data and iteration == 1:
-            data = Node(data)
-            data.next = head
-            return data
-        if head.next.data > data:
-            temp = head.next
-            data = Node(data)
-            head.next = data
-            data.next = temp
-            break
-        head = head.next
-        iteration += 1
-    return saved_head
+        return
+    visited = set()
+    visited.add(head.data)
+    current = head
+    while current.next:
+        if current.next.data in visited:
+            current.next = current.next.next
+        else:
+            visited.add(current.next.data)
+            current = current.next
+    return head
+
+def swap_pairs(head):
+    helping_node = Node(next=head)
+    prev = helping_node
+
+    while prev.next and prev.next.next:
+        first = prev.next
+        second = prev.next.next
+        prev.next = second
+        first.next = second.next
+        second.next = first
+        prev = first
+
+    return helping_node.next
+
+def sorted_insert(head, data):
+    new_node = Node(data)
+    if head is None or data < head.data:
+        new_node.next = head
+        return new_node
+
+    current = head
+    while current.next and current.next.data < data:
+        current = current.next
+
+    new_node.next = current.next
+    current.next = new_node
+    return head
