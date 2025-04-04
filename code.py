@@ -8,6 +8,22 @@ class Context(object):
         self.source = source
         self.dest = dest
 
+# Push a new node onto the head of the list
+def push(head, data):
+    a = Node(data)
+    a.next = head
+    return a
+
+# Build a linked list with values 1 -> 2 -> 3
+def build_one_two_three():
+    a = Node(1)
+    b = Node(2)
+    c = Node(3)
+    a.next = b
+    b.next = c
+    return a
+
+# Reverse a linked list recursively
 def reverse(head):
     if head is None or head.next is None:
         return head
@@ -16,6 +32,7 @@ def reverse(head):
     head.next = None
     return new_head
 
+# Remove duplicate values from a sorted linked list
 def remove_duplicates(head):
     if head is None:
         return
@@ -30,6 +47,7 @@ def remove_duplicates(head):
             current = current.next
     return head
 
+# Swap pairs of nodes in a linked list
 def swap_pairs(head):
     helping_node = Node(next=head)
     prev = helping_node
@@ -44,6 +62,7 @@ def swap_pairs(head):
 
     return helping_node.next
 
+# Insert a node into a sorted linked list
 def sorted_insert(head, data):
     new_node = Node(data)
     if head is None or data < head.data:
@@ -58,6 +77,7 @@ def sorted_insert(head, data):
     current.next = new_node
     return head
 
+# Move a node from one list to another
 def move_node(source, dest):
     if not source:
         raise ValueError
@@ -67,6 +87,7 @@ def move_node(source, dest):
     dest = new_head
     return Context(source, dest)
 
+# Convert a linked list to a string representation
 def stringify(node):
     result = ''
     while node is not None:
@@ -75,6 +96,7 @@ def stringify(node):
     result += 'None'
     return result
 
+# Convert a string representation of a linked list to an actual linked list
 def linked_list_from_string(s: str):
     null_values = {"null", "NULL", "nil", "nullptr", "null()", 'None'}
     if s.strip() in null_values:
