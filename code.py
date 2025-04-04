@@ -1,4 +1,21 @@
-from preloaded import Node
+class Node(object):
+    def __init__(self, data=None, next=None):
+        self.data = data
+        self.next = next
+
+def remove_duplicates(head):
+    if head is None:
+        return
+    visited = set()
+    visited.add(head.data)
+    current = head
+    while current.next:
+        if current.next.data in visited:
+            current.next = current.next.next
+        else:
+            visited.add(current.next.data)
+            current = current.next
+    return head
 
 def swap_pairs(head):
     helping_node = Node(next=head)
