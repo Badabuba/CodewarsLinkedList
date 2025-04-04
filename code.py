@@ -3,6 +3,11 @@ class Node(object):
         self.data = data
         self.next = next
 
+class Context(object):
+    def __init__(self, source, dest):
+        self.source = source
+        self.dest = dest
+
 def reverse(head):
     if head is None or head.next is None:
         return head
@@ -52,3 +57,12 @@ def sorted_insert(head, data):
     new_node.next = current.next
     current.next = new_node
     return head
+
+def move_node(source, dest):
+    if not source:
+        raise ValueError
+    new_head = source
+    source = source.next
+    new_head.next = dest
+    dest = new_head
+    return Context(source, dest)
