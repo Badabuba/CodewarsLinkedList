@@ -38,3 +38,17 @@ def swap_pairs(head):
         prev = first
 
     return helping_node.next
+
+def sorted_insert(head, data):
+    new_node = Node(data)
+    if head is None or data < head.data:
+        new_node.next = head
+        return new_node
+
+    current = head
+    while current.next and current.next.data < data:
+        current = current.next
+
+    new_node.next = current.next
+    current.next = new_node
+    return head
